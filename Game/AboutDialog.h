@@ -4,15 +4,14 @@
 #include "afxdialogex.h"
 #include "Game.h"
 
+/* Класс диалога "О программе", наследуемый от класса диалогов с поддеркой передачи данных */
 class CAboutDlg : public CDialogEx
 {
 public:
-	enum {IDD = IDD_ABOUTBOX};
+	enum {IDD = IDD_ABOUTBOX};	// Идентификатор диалога
 
-	CAboutDlg();
+	CAboutDlg();	// Конструктор по-умолчанию
 
-protected:
-	virtual void DoDataExchange(CDataExchange *);
-
-	DECLARE_MESSAGE_MAP()
+private:
+	DECLARE_MESSAGE_MAP() // Макрос конца класса для объявления перехватываемых сообщений
 };

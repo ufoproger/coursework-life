@@ -1,15 +1,10 @@
 ﻿#include "stdafx.h"
 #include "AboutDialog.h"
 
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-END_MESSAGE_MAP()
+BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)	// Начало объвления перехватываемых сообщений
+END_MESSAGE_MAP()	// Конец объявления перехватываемых сообщений
 
-CAboutDlg::CAboutDlg() :
-	CDialogEx(CAboutDlg::IDD)
+CAboutDlg::CAboutDlg() :	// Конструктор по-умолчанию
+	CDialogEx(CAboutDlg::IDD)	// Вызов конструктора для родительского класса
 {
-}
-
-void CAboutDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CDialogEx::DoDataExchange(pDX);
 }

@@ -2,137 +2,136 @@
 #include "ProtoblastEffect.h"
 #include <algorithm>
 
-CProtoblastEffect::CProtoblastEffect(CSize area) : 
-	m_area(area)
+CProtoblastEffect::CProtoblastEffect(CSize area) : 	// Конструктор
+	m_area(area)	// Вызываем родительский конструктор
 {
 }
 
-CProtoblastEffect::~CProtoblastEffect()
+CProtoblastEffect::~CProtoblastEffect()	// Деструктор
 {
 }
 
-void CProtoblastEffect::ChangeColor(COLORREF endColor, int stepR, int stepG, int stepB)
+COLORREF CProtoblastEffect::GetCurrColor()	// Метод получения текущего цвета
 {
-	if (m_currColor == endColor)
-		return;
-
-	int r = MakeChangeColorStep(GetRValue(m_currColor), GetRValue(endColor), stepR);
-	int g = MakeChangeColorStep(GetGValue(m_currColor), GetGValue(endColor), stepG);
-	int b = MakeChangeColorStep(GetBValue(m_currColor), GetBValue(endColor), stepB);
-
-	m_currColor = RGB(r, g, b);
+	return m_currColor;	// Текущий цвет
 }
 
-byte CProtoblastEffect::MakeChangeColorStep(int chCurr, int chEnd, int step)
+void CProtoblastEffect::ChangeColor(COLORREF endColor, int stepR, int stepG, int stepB)	// Метод изменения текущего цвета в сторону заданного цвета пошагово для каждой компоненты
 {
-	if (step < 0)
-		step *= -1;
+	if (m_currColor == endColor)	// Если достигли цели
+		return;	// То делать нечего
 
-	if (chCurr == chEnd)
-		return chCurr;
+	int r = MakeChangeColorStep(GetRValue(m_currColor), GetRValue(endColor), stepR);	// Иначе для каждой компоненты приближаем цель
+	int g = MakeChangeColorStep(GetGValue(m_currColor), GetGValue(endColor), stepG);	// Приближаем цель для каждой компоненты
+	int b = MakeChangeColorStep(GetBValue(m_currColor), GetBValue(endColor), stepB);	// Приближаем...
 
-	if (chCurr > chEnd)
-		chCurr = max(chCurr - step, chEnd);
+	m_currColor = RGB(r, g, b);	// Получаем текущий цвет
+}
+
+byte CProtoblastEffect::MakeChangeColorStep(int chCurr, int chEnd, int step)	// Метод изменения цветовой компоненты до заданной с заданным шагом
+{
+	if (step < 0)	// Если шаг отрицательный
+		step *= -1;	// То делаем его положительным
+
+	if (chCurr == chEnd)	// Если компоненты похожи
+		return chCurr;	// То эффект достигнут
+
+	if (chCurr > chEnd)	// Если надо назад уменьшить компоненту
+		chCurr = max(chCurr - step, chEnd);	// То так и делаем
 	else
-		chCurr = min(chCurr + step, chEnd);
+		chCurr = min(chCurr + step, chEnd);	// Иначе надо немного вперед
 
-	if (chCurr < 0)
-		chCurr = 0;
-
-	if (chCurr > 255)
-		chCurr = 255;
-
-	return chCurr;
+	return chCurr;	// Что получилось, то и возвращаем
 }
 
-void CProtoblastEffect::Render(CMemoryDC &dc, CPoint position)
+void CProtoblastEffect::Render(CMemoryDC &dc, CPoint position)	// Метод отрисовки
 {
-	dc.FillSolidRect(position.x, position.y, m_area.cx, m_area.cy, m_currColor);
+	dc.FillSolidRect(position.x, position.y, m_area.cx, m_area.cy, m_currColor);	// Заливаем внутреннюю область текущим цветом
 }
 
-EStatus CProtoblastEffect::GetLastStatus()
+EStatus CProtoblastEffect::GetLastStatus()	// Получаем последний статус
 {
-	return STATUS_NONE;
+	return STATUS_NONE;	// Последнее здесь не нужно
 }
 
-CProtoblastEffectDisable::CProtoblastEffectDisable(CSize area, CProtoblastEffect *last) :
-	CProtoblastEffect(area)
+CProtoblastEffectDisable::CProtoblastEffectDisable(CSize area, CProtoblastEffect *last) :	// Конструктор
+	CProtoblastEffect(area)	// Конструктор родительского класса
 {
-	m_currColor = last ? last->GetCurrColor() : m_endColor;
+	m_currColor = last ? last->GetCurrColor() : m_endColor;	// Если у прошлого эффекта есть текущий цвет, то он и для нас тоже текущий
 }
 
-CProtoblastEffectDisable::~CProtoblastEffectDisable()
+CProtoblastEffectDisable::~CProtoblastEffectDisable()	// Деструктор
 {
 }
 
-void CProtoblastEffectDisable::Tick()
+void CProtoblastEffectDisable::Tick()	// Метод тика
 {
-	ChangeColor(m_endColor, 20, 20, 20);
+	ChangeColor(m_endColor, 20, 20, 20);	// Приближаем текущий цвет к конечнему 20-мильными шагами
 }
 
-EStatus CProtoblastEffectDisable::GetStatus()
+EStatus CProtoblastEffectDisable::GetStatus()	// Метод получения статуса
 {
-	return STATUS_DISABLE;
+	return STATUS_DISABLE;	// Статус мертвой клетки
 }
 
-CProtoblastEffectActive::CProtoblastEffectActive(CSize area, CProtoblastEffect *last) :
-	CProtoblastEffect(area)
+CProtoblastEffectActive::CProtoblastEffectActive(CSize area, CProtoblastEffect *last) :	// Конструктор
+	CProtoblastEffect(area)	// Конструктор родительского класса
 {
-	m_currColor = last ? last->GetCurrColor() : m_endColor;
+	m_currColor = last ? last->GetCurrColor() : m_endColor;	// Если была прошлая клетка, то забираем её текущий цвет себе
 }
 
-CProtoblastEffectActive::~CProtoblastEffectActive()
-{
-}
-
-EStatus CProtoblastEffectActive::GetStatus()
-{
-	return STATUS_ACTIVE;
-}
-
-void CProtoblastEffectActive::Tick()
-{
-	ChangeColor(m_endColor, 20, 20, 20);
-}
-
-CProtoblastEffectHover::CProtoblastEffectHover(CSize area, CProtoblastEffect *last) :
-	CProtoblastEffect(area)
-{
-	m_lastStatus = last->GetStatus();
-	m_color = 0;
-	m_colors[0] = RGB(255, 255, 153);
-	m_colors[1] = RGB(255, 255, 102);
-	m_colors[2] = RGB(255, 255, 51);
-	m_colors[3] = m_colors[1];
-	m_currColor = last->GetCurrColor();
-}
-
-CProtoblastEffectHover::~CProtoblastEffectHover()
+CProtoblastEffectActive::~CProtoblastEffectActive()	// Деструктор
 {
 }
 
-void CProtoblastEffectHover::Tick()
+EStatus CProtoblastEffectActive::GetStatus()	// Метод полученрия статуса
 {
-	++m_tickCount;
+	return STATUS_ACTIVE;	// Статус живой клетки
+}
 
-	if (m_tickCount % 10 == 0)
+void CProtoblastEffectActive::Tick()	// Метод тика
+{
+	ChangeColor(m_endColor, 20, 20, 20);	// Приближаем текущий цвет к цели
+}
+
+CProtoblastEffectHover::CProtoblastEffectHover(CSize area, CProtoblastEffect *last) :	// Конструктор
+	CProtoblastEffect(area)	// Конструктор родительского класса
+{
+	m_lastStatus = last->GetStatus();	// Получаем статус прошлого эффекта
+	m_color = 0;	// Индекс текущего цвета
+	m_colors[0] = RGB(255, 255, 153);	// Ярко-желтый
+	m_colors[1] = RGB(255, 255, 102);	// Желтый
+	m_colors[2] = RGB(255, 255, 51);	// Не ярко-желтый
+	m_colors[3] = m_colors[1];	// Желтый
+	m_currColor = last->GetCurrColor();	// Получаем текущий цвет, чтобы потом его вернуть следующему эффекту
+}
+
+CProtoblastEffectHover::~CProtoblastEffectHover()	// Деструктор
+{
+}
+
+void CProtoblastEffectHover::Tick()	// Метод тика
+{
+	++m_tickCount;	// Тикаем
+
+	if (m_tickCount % 10 == 0)	// Если пора менять цвет
 	{
-		m_tickCount = 0;
-		m_color = (m_color + 1) % 4; 
+		m_tickCount = 0;	// То тикаем заново
+		m_color = (m_color + 1) % 4; 	// Меняем цвет на следующий
 	}
 }
 
-void CProtoblastEffectHover::Render(CMemoryDC &dc, CPoint position)
+void CProtoblastEffectHover::Render(CMemoryDC &dc, CPoint position)	// Метод рисования
 {
-	dc.FillSolidRect(position.x, position.y, m_area.cx, m_area.cy, m_colors[m_color]);
+	dc.FillSolidRect(position.x, position.y, m_area.cx, m_area.cy, m_colors[m_color]);	// Рисуем внутреннюю область цвета, на который указывает индекс цвета
 }
 
-EStatus CProtoblastEffectHover::GetStatus()
+EStatus CProtoblastEffectHover::GetStatus()	// Метод получения статуса
 {
-	return STATUS_HOVER;
+	return STATUS_HOVER;	// Статус выделенной клетки
 }
 
-EStatus CProtoblastEffectHover::GetLastStatus()
+EStatus CProtoblastEffectHover::GetLastStatus()	// Метод получения статуса прошлого эффекта
 {
-	return m_lastStatus;
+	return m_lastStatus;	// Прошлый статус
 }
