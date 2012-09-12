@@ -14,12 +14,12 @@ public:
 
 private:
 	CStatusBar m_wndStatusBar;	// Статус-бар
-	CChildView m_wndView;	// Вид
+	CChildView m_wndView;		// Вид
 
-	afx_msg void OnTimer(UINT);	// Метод перехвата тика таймера
+	afx_msg void OnTimer(UINT);				// Метод перехвата тика таймера
 	afx_msg int OnCreate(LPCREATESTRUCT);	// Метод перехвата сообщения создания окна
-	afx_msg void OnSetFocus(CWnd *);	// Метод перехвата получения фокуса окна
+	afx_msg void OnSetFocus(CWnd *);		// Метод перехвата получения фокуса окна
 
-	DECLARE_MESSAGE_MAP() // Макрос конца класса для объявления перехватываемых сообщений
-	DECLARE_DYNAMIC(CMainFrame) // Макрос возможности получения информации о классе во время выполнения программы
+	DECLARE_MESSAGE_MAP()			// Макрос конца класса для объявления перехватываемых сообщений
+	DECLARE_DYNAMIC(CMainFrame)		// Макрос возможности получения информации о классе во время выполнения программы
 };

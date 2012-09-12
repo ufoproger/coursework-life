@@ -5,14 +5,14 @@ class CMemoryDC : public CDC
 {
 public:
 	CMemoryDC(CDC *, const CRect *pRect = NULL);	// Конструктор
-	~CMemoryDC();	// Конструктор по-умолчанию
+	~CMemoryDC();				// Конструктор по-умолчанию
 	CMemoryDC* operator->();	// Оператор получение доступа к методам класса
-	operator CMemoryDC*();	// Оператор разыменования
+	operator CMemoryDC*();		// Оператор разыменования
 
 private:       
-	CBitmap m_bitmap;	// Текущий экран
+	CBitmap m_bitmap;		// Текущий экран
 	CBitmap *m_oldBitmap;	// Старый экран
-	CDC *m_pDC;	// Контекст рисования первоначальный
-	CRect m_rect;	// Область рисования
-	BOOL m_bMemDC;	// Рисуем ли сейчас в памяти?
+	CDC *m_pDC;				// Контекст рисования первоначальный
+	CRect m_rect;			// Область рисования
+	BOOL m_bMemDC;			// Рисуем ли сейчас в памяти?
 };

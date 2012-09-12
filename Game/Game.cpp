@@ -7,10 +7,10 @@
 
 BEGIN_MESSAGE_MAP(CGameApp, CWinApp)	// Макрос начала объявления перехватываемых сообщений
 	ON_COMMAND_RANGE(ID_EVOLVE_1_SECOND, ID_EVOLVE_HAND, &CGameApp::OnEvolve)	// Сообщения выбора скорости эволюции
-	ON_COMMAND(ID_APP_ABOUT, &CGameApp::OnAppAbout)	// Сообщение о заинтересованности в просмотре пункта "О программе"
-	ON_COMMAND(ID_NEW_GAME, &CGameApp::OnNewGame)	// Кто-то хочет начать новую игру - вот и сообщение
-	ON_COMMAND(ID_OPEN_GAME, &CGameApp::OnOpenGame)	// Сообщение пункта "Открыть игру"
-	ON_COMMAND(ID_SAVE_GAME, &CGameApp::OnSaveGame)	// Сообщение пункта "Сохранить игру как"
+	ON_COMMAND(ID_APP_ABOUT, &CGameApp::OnAppAbout)		// Сообщение о заинтересованности в просмотре пункта "О программе"
+	ON_COMMAND(ID_NEW_GAME, &CGameApp::OnNewGame)		// Кто-то хочет начать новую игру - вот и сообщение
+	ON_COMMAND(ID_OPEN_GAME, &CGameApp::OnOpenGame)		// Сообщение пункта "Открыть игру"
+	ON_COMMAND(ID_SAVE_GAME, &CGameApp::OnSaveGame)		// Сообщение пункта "Сохранить игру как"
 END_MESSAGE_MAP()	// Макрос конца объявления перехватываемых сообщений
 
 CGameApp::CGameApp()	// Конструктор

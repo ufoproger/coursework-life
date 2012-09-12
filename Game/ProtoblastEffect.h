@@ -21,7 +21,7 @@ public:
 
 protected:
 	COLORREF m_currColor;	// Текущий цвет
-	CSize m_area;	// Размер
+	CSize m_area;			// Размер
 
 	void ChangeColor(COLORREF, int, int, int);	// Метод изменения текущего цвета в сторону заданного цвета пошагово для каждой компоненты
 	byte MakeChangeColorStep (int, int, int);	// Метод изменения цветовой компоненты до заданной с заданным шагом
@@ -34,7 +34,7 @@ public:
 	CProtoblastEffectDisable(CSize, CProtoblastEffect *);	// Конструктор
 	~CProtoblastEffectDisable();	// Деструктор
 
-	void Tick();	// Метод тика
+	void Tick();			// Метод тика
 	EStatus GetStatus();	// Метод получения статуса
 
 protected:
@@ -48,7 +48,7 @@ public:
 	CProtoblastEffectActive(CSize, CProtoblastEffect *);	// Конструктор
 	~CProtoblastEffectActive();	// Деструктор
 
-	void Tick();	// Метод тика
+	void Tick();			// Метод тика
 	EStatus GetStatus();	// Метод получения статуса
 
 protected:
@@ -64,12 +64,12 @@ public:
 	
 	void Tick();	// Метод тика
 	void Render(CMemoryDC &, CPoint);	// Метод рисования
-	EStatus GetStatus();	// Метод получения статус
+	EStatus GetStatus();		// Метод получения статус
 	EStatus GetLastStatus();	// Метод получения последнего статуса
 
 protected:
 	COLORREF m_colors[4];	// Промежуточные цвета
-	int m_color;	// Индекс текущего выбранного промежуточного цвета
-	int m_tickCount;	// Счетчик с начала анимации
+	int m_color;			// Индекс текущего выбранного промежуточного цвета
+	int m_tickCount;		// Счетчик с начала анимации
 	EStatus m_lastStatus;	// Предпоследний статус
 };
