@@ -1,4 +1,4 @@
-﻿#define IDD_ABOUTBOX                    100
+#define IDD_ABOUTBOX					100
 #define IDR_MAINFRAME                   128
 #define IDR_GameTYPE                    130
 #define IDB_GRASS                       313

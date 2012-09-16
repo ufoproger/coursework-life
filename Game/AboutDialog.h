@@ -5,6 +5,7 @@
 #include "Game.h"
 
 /* Класс диалога "О программе", наследуемый от класса диалогов с поддеркой передачи данных */
+
 class CAboutDlg : public CDialogEx
 {
 public:

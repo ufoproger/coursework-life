@@ -1,4 +1,6 @@
 ﻿#include "stdafx.h"
+#include "afxwinappex.h"
+#include "afxdialogex.h"
 #include "Game.h"
 #include "MainFrm.h"
 #include "Protoblast.h"
@@ -69,9 +71,9 @@ BOOL CGameApp::InitInstance()	// Метод инициализации окна
 	InitCommonControlsEx(&initCtrls);	// Задаём
 	CWinApp::InitInstance();	// Родителю даём возможность тоже проинициализироваться
 	EnableTaskbarInteraction(FALSE);	// Настройки поведения в панели задач
-	SetRegistryKey(_T("Mihail Snetkov"));
-
-	CMainFrame* pFrame = new CMainFrame;	// Создаём окно
+//	SetRegistryKey(_T("Mihail Snetkov"));
+//	AfxInitRichEdit2();
+	CMainFrame *pFrame = new CMainFrame;	// Создаём окно
 
 	if (!pFrame)	// Если не создали окно
 		return FALSE;	// То играть не во что

@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -72,7 +72,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -103,8 +103,8 @@
     <None Include="res\hand.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\AboutDialog.h" />
     <ClInclude Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\targetver.h" />
-    <ClInclude Include="AboutDialog.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="MemoryDC.h" />
     <ClInclude Include="ChildView.h" />
@@ -116,15 +116,21 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\stdafx.cpp" />
-    <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\AboutDialog.cpp" />
+    <ClCompile Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Game.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MemoryDC.cpp" />
     <ClCompile Include="Protoblast.cpp" />
-    <ClCompile Include="ProtoblastEffect.cpp" />
+    <ClCompile Include="ProtoblastEffect.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

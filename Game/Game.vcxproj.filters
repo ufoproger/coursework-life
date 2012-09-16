@@ -59,10 +59,10 @@
     <ClInclude Include="Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AboutDialog.h">
+    <ClInclude Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\targetver.h">
+    <ClInclude Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\AboutDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -82,9 +82,6 @@
     <ClCompile Include="ProtoblastEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AboutDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Мои документы\Visual Studio 2010\Projects\Coursework\Game\AboutDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
